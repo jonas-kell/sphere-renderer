@@ -11,6 +11,6 @@ from coordinates import (
 
 
 def get_2d_coordinate_from_circle_coordinate(circle_x, circle_y):
-    print(circle_x)
-    print(circle_y)
+    # print(circle_x)
+    # print(circle_y)
     return 0, 0

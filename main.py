@@ -6,6 +6,8 @@ from coordinates import (
 
 from translate_coordinates import get_2d_coordinate_from_circle_coordinate
 
+from PIL import ImageGrab
+
 root = tkinter.Tk()
 output_canvas = tkinter.Canvas(root)
 input_canvas = tkinter.Canvas(root)
@@ -48,9 +50,21 @@ for pentagon in pentagons:
 
         input_canvas.create_line(point_a_x, point_a_y, point_b_x, point_b_y, width=2)
 
-# draw on the
+# get the image info of the input_canvas
+def get_in_image():
+    x = root.winfo_rootx() + input_canvas.winfo_x()
+    y = root.winfo_rooty() + input_canvas.winfo_y()
+    x1 = x + input_canvas.winfo_width()
+    y1 = y + input_canvas.winfo_height()
+    return ImageGrab.grab().crop((x, y, x1, y1))
+
+
+# draw on the output_canvas
 def draw_globe_projection():
-    print("started drawing sphere")
+    in_image = get_in_image()
+
+    # print("started drawing sphere")
+    output_canvas.delete("all")
     output_canvas.create_rectangle(0, 0, in_width, in_height, fill="white")
 
     radius = 30
@@ -70,7 +84,7 @@ def draw_globe_projection():
 
                 # look up color
                 x_canvas, y_canvas = coords_to_2d_canvas_coords(x_2d, y_2d)
-                color = input_canvas.get
+                color = "#%02x%02x%02x" % in_image.getpixel((x_canvas, y_canvas))
 
                 # render to canvas
                 output_canvas.create_rectangle(
@@ -82,7 +96,7 @@ def draw_globe_projection():
                     width=0,
                 )
 
-    print("finished drawing sphere")
+    # print("finished drawing sphere")
 
 
 draw_globe_projection()
