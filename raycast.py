@@ -1,3 +1,5 @@
+# https://www.erikrotteveel.com/python/three-dimensional-ray-tracing-in-python/
+
 import numpy as np
 
 # source: http://geomalgorithms.com/a06-_intersect-2.html
