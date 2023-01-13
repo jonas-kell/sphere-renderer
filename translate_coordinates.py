@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 from coordinates import (
     get_2d_coordinates_of_pentagons,
@@ -11,6 +12,19 @@ from coordinates import (
 
 
 def get_2d_coordinate_from_circle_coordinate(circle_x, circle_y):
-    # print(circle_x)
-    # print(circle_y)
-    return 0, 0
+    sphere_x, sphere_y, sphere_z = circle_coordinate_to_sphere_coordinate(
+        circle_x, circle_y
+    )
+
+    if sphere_x > sphere_y:
+        return 0, 0
+    else:
+        return 1, 0
+
+
+def circle_coordinate_to_sphere_coordinate(circle_x, circle_y):
+    return (
+        circle_x,
+        circle_y,
+        math.sqrt(1 - circle_x**2 - circle_y**2 + 0.0001),
+    )  # add small value for avoiding math domain errors
