@@ -67,6 +67,7 @@ def draw_globe_projection():
     output_canvas.delete("all")
     output_canvas.create_rectangle(0, 0, in_width, in_height, fill="white")
 
+    # 80, 3 gives good resolution, but takes ca. 30 sek
     radius = 30
     pixel_width = 5
     radius_squared = radius * radius
@@ -97,9 +98,6 @@ def draw_globe_projection():
                 )
 
     print("finished drawing sphere")
-
-
-draw_globe_projection()
 
 
 def mouse_move(e):

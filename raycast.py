@@ -60,3 +60,58 @@ def ray_intersect_triangle(p0, p1, triangle):
         # polygon, thus inside.
         return 2
     return 1
+
+
+# https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/barycentric-coordinates.html
+# https://courses.cs.washington.edu/courses/csep557/10au/lectures/triangle_intersection.pdf
+def get_barycentric_coordinates(p0, p1, triangle):
+    # Assuming, the ray cast from p0 to p1 hits the triangle defined by triangle,
+    # this returns the barycentric coordinates (https://en.wikipedia.org/wiki/Barycentric_coordinate_system)
+    # to the intersection point
+    #
+    # arguments:
+    # p0, p1: numpy.ndarray, both with shape (3,) for x, y, z.
+    # triangle: numpy.ndarray, shaped (3,3), with each row
+    #     representing a vertex and three columns for x, y, z.
+    #
+    # returns:
+    #    u, v, w the barycentric coordinates, where u * A + v * B + w * C = P, the intersection point
+
+    a, b, c = triangle
+    ba = b - a
+    ca = c - a
+    normal = np.cross(ba, ca)
+
+    d = np.inner(normal, a)
+
+    t = (d - np.inner(normal, p0)) / np.inner(normal, p1 - p0)
+
+    Q = p0 + t * (p1 - p0)
+    # print(Q)  # Works
+
+    whole_triangle_area = triangle_area(a, b, c)
+    # print(whole_triangle_area)  # Works
+    v = triangle_area(c, a, Q) / whole_triangle_area
+    w = triangle_area(a, b, Q) / whole_triangle_area
+
+    u = 1 - v - w
+
+    # print(u * a + v * b + w * c)  # Works
+
+    return u, v, w
+
+
+def triangle_area(p1, p2, p3):
+    return 0.5 * np.linalg.norm(np.cross(p2 - p1, p3 - p1))
+
+
+if __name__ == "__main__":
+
+    print(
+        get_barycentric_coordinates(
+            np.array([0, 0, 0]),
+            np.array([2.3, 2.52, 1.59]),
+            np.array([[0, 0, 1], [0, 2, 0], [3, 0, 0]]),
+        )
+    )
+    # Q = (0.64, 0.7, 0.44)

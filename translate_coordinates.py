@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from raycast import ray_intersect_triangle
+from raycast import ray_intersect_triangle, get_barycentric_coordinates
 
 from coordinates import (
     get_2d_coordinates_of_pentagons,
@@ -41,7 +41,15 @@ def find_intersected_triangle_in_2d_and_transform_coordinates(
             triangle[0],
         ):
             # we have found the correct triangle, transform the coordinates !!
-            return 1, 1
+
+            u, v, w = get_barycentric_coordinates(
+                np.array([0, 0, 0]),
+                2 * np.array([sphere_x, sphere_y, sphere_z]),
+                triangle[0],
+            )
+            a, b, c = triangle[1]  # 2d
+
+            return u * a + v * b + w * c
 
     return 3.5, 3.5
 
