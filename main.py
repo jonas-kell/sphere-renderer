@@ -1,13 +1,10 @@
 import tkinter
-import numpy as np
+
 from coordinates import (
     get_2d_coordinates_of_pentagons,
-    get_3d_coordinates_of_pentagons,
-    get_2d_coordinates,
-    get_3d_coordinates,
-    get_2d_to_3d,
-    get_3d_to_2d,
 )
+
+from translate_coordinates import get_2d_coordinate_from_circle_coordinate
 
 root = tkinter.Tk()
 output_canvas = tkinter.Canvas(root)
@@ -65,12 +62,23 @@ def draw_globe_projection():
         for j in range(-radius, radius + 1):
             j_squared = j * j
             if i_sqared + j_squared <= radius_squared:
+
+                # get coordinate to look up color from
+                x_2d, y_2d = get_2d_coordinate_from_circle_coordinate(
+                    i / radius, j / radius
+                )
+
+                # look up color
+                x_canvas, y_canvas = coords_to_2d_canvas_coords(x_2d, y_2d)
+                color = input_canvas.get
+
+                # render to canvas
                 output_canvas.create_rectangle(
                     out_width // 2 + pixel_width * i,
                     out_height // 2 - pixel_width * j,
                     out_width // 2 + pixel_width * i + 2 * pixel_width - 2,
                     out_height // 2 - pixel_width * j + 2 * pixel_width - 2,
-                    fill="black",
+                    fill=color,
                     width=0,
                 )
 
