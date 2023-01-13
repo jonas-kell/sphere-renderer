@@ -1,7 +1,7 @@
 import tkinter
 from coordinates import (
-    get_2d_coordinates_of_hexagons,
-    get_3d_coordinates_of_hexagons,
+    get_2d_coordinates_of_pentagons,
+    get_3d_coordinates_of_pentagons,
     get_2d_coordinates,
     get_3d_coordinates,
     get_2d_to_3d,
@@ -26,6 +26,29 @@ out_width = output_canvas.winfo_width()
 out_height = output_canvas.winfo_height()
 
 input_canvas.create_rectangle(0, 0, in_width, in_height, fill="blue")
+
+pentagon_side_length_2d = 50
+
+pentagons = get_2d_coordinates_of_pentagons()
+
+
+def coords_to_2d_canvas_coords(x, y):
+    return (
+        x * pentagon_side_length_2d + in_width // 2,
+        -y * pentagon_side_length_2d + in_height // 2,
+    )
+
+
+for pentagon in pentagons:
+    for i in range(0, 5):
+        point_a_x, point_a_y = coords_to_2d_canvas_coords(
+            pentagon[i][0], pentagon[i][1]
+        )
+        point_b_x, point_b_y = coords_to_2d_canvas_coords(
+            pentagon[(i + 1) % 5][0], pentagon[(i + 1) % 5][1]
+        )
+
+        input_canvas.create_line(point_a_x, point_a_y, point_b_x, point_b_y, width=2)
 
 
 def mouse_move(e):

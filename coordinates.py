@@ -1,10 +1,23 @@
 import math
+import numpy as np
 
 phi = (1 + math.sqrt(5)) / 2
 a = math.sin(2 * math.pi * 18 / 360)
 b = math.cos(2 * math.pi * 18 / 360)
 c = math.cos(2 * math.pi * 36 / 360)
 d = math.sin(2 * math.pi * 36 / 360)
+
+
+theta = np.radians(-36)
+c, s = np.cos(theta), np.sin(theta)
+RotMat = np.array(((c, -s), (s, c)))
+
+
+def turn_2d_clockwise_45_degree(point_2d):
+    new_point = (point_2d[0] - a - c, point_2d[1])
+    rotated = RotMat @ np.array(new_point)
+    return (rotated[0], rotated[1])
+
 
 # 3d-coordinates
 
@@ -31,44 +44,44 @@ TTT = (-phi, 0, -1 / phi)
 
 # 2d-coordinates
 
-A = (a, 0)
-B = (2 * c - a, 0)
-C = (2 * c, b)
-D = (c, b + d)
-E = (0, b)
-F = (c - a, 2 * b + d)
-G = (a - c, 2 * b + d)
-H = (-c, b + d)
-I = (3 * c - 2 * a, b + d)
-J = (3 * c - a, 2 * b + d)
-K = (2 * c - a, 2 * b + 2 * d)
-L = (c, 3 * b + d)
-M = (0, 3 * b + 2 * d)
-N = (-c, 3 * b + d)
-O = (a - 2 * c, 2 * b + 2 * d)
-P = (a - 3 * c, 2 * b + d)
-Q = (2 * a - 3 * c, b + d)
-R = (-2 * c, b)
-S = (a - 2 * c, 0)
-T = (-a, 0)
-AA = (4 * c, 0 + b)
-BB = (6 * c - 2 * a, b)
-CC = (6 * c - a, 0)
-DD = (5 * c - a, -d)
-EE = (4 * c - a, 0)
-FF = (5 * c - 2 * a, -b - d)
-GG = (3 * c, -b - d)
-HH = (3 * c - a, -d)
-II = (7 * c - 3 * a, -d)
-JJ = (7 * c - 2 * a, -b - d)
-KK = (6 * c - 2 * a, -b - 2 * d)
-LL = (5 * c - a, -2 * b - d)
-MM = (4 * c - a, -2 * b - 2 * d)
-NN = (3 * c - a, -2 * b - d)
-OO = (2 * c, -b - 2 * d)
-PP = (c, -b - d)
-QQ = (c + a, -d)
-TT = (4 * c - 2 * a, b)
+A = turn_2d_clockwise_45_degree((a, 0))
+B = turn_2d_clockwise_45_degree((2 * c - a, 0))
+C = turn_2d_clockwise_45_degree((2 * c, b))
+D = turn_2d_clockwise_45_degree((c, b + d))
+E = turn_2d_clockwise_45_degree((0, b))
+F = turn_2d_clockwise_45_degree((c - a, 2 * b + d))
+G = turn_2d_clockwise_45_degree((a - c, 2 * b + d))
+H = turn_2d_clockwise_45_degree((-c, b + d))
+I = turn_2d_clockwise_45_degree((3 * c - 2 * a, b + d))
+J = turn_2d_clockwise_45_degree((3 * c - a, 2 * b + d))
+K = turn_2d_clockwise_45_degree((2 * c - a, 2 * b + 2 * d))
+L = turn_2d_clockwise_45_degree((c, 3 * b + d))
+M = turn_2d_clockwise_45_degree((0, 3 * b + 2 * d))
+N = turn_2d_clockwise_45_degree((-c, 3 * b + d))
+O = turn_2d_clockwise_45_degree((a - 2 * c, 2 * b + 2 * d))
+P = turn_2d_clockwise_45_degree((a - 3 * c, 2 * b + d))
+Q = turn_2d_clockwise_45_degree((2 * a - 3 * c, b + d))
+R = turn_2d_clockwise_45_degree((-2 * c, b))
+S = turn_2d_clockwise_45_degree((a - 2 * c, 0))
+T = turn_2d_clockwise_45_degree((-a, 0))
+AA = turn_2d_clockwise_45_degree((4 * c, 0 + b))
+BB = turn_2d_clockwise_45_degree((6 * c - 2 * a, b))
+CC = turn_2d_clockwise_45_degree((6 * c - a, 0))
+DD = turn_2d_clockwise_45_degree((5 * c - a, -d))
+EE = turn_2d_clockwise_45_degree((4 * c - a, 0))
+FF = turn_2d_clockwise_45_degree((5 * c - 2 * a, -b - d))
+GG = turn_2d_clockwise_45_degree((3 * c, -b - d))
+HH = turn_2d_clockwise_45_degree((3 * c - a, -d))
+II = turn_2d_clockwise_45_degree((7 * c - 3 * a, -d))
+JJ = turn_2d_clockwise_45_degree((7 * c - 2 * a, -b - d))
+KK = turn_2d_clockwise_45_degree((6 * c - 2 * a, -b - 2 * d))
+LL = turn_2d_clockwise_45_degree((5 * c - a, -2 * b - d))
+MM = turn_2d_clockwise_45_degree((4 * c - a, -2 * b - 2 * d))
+NN = turn_2d_clockwise_45_degree((3 * c - a, -2 * b - d))
+OO = turn_2d_clockwise_45_degree((2 * c, -b - 2 * d))
+PP = turn_2d_clockwise_45_degree((c, -b - d))
+QQ = turn_2d_clockwise_45_degree((c + a, -d))
+TT = turn_2d_clockwise_45_degree((4 * c - 2 * a, b))
 
 # mapping (first 2d then 3d)
 
@@ -146,14 +159,14 @@ pentagons = [  # only the 2d points
 ]
 
 
-def get_2d_coordinates_of_hexagons():
+def get_2d_coordinates_of_pentagons():
     return pentagons
 
 
 pentagon_cache_3d = None
 
 
-def get_3d_coordinates_of_hexagons():
+def get_3d_coordinates_of_pentagons():
     global pentagon_cache_3d
     if pentagon_cache_3d is None:
         pentagon_cache_3d = []
