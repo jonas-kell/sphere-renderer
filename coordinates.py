@@ -127,14 +127,6 @@ mapping = [
 ]
 
 
-def get_2d_to_3d(point_3d):
-    for mapped in mapping:
-        if mapped[1] == point_3d:
-            return mapped[0]
-
-    raise IndexError
-
-
 def get_3d_to_2d(point_2d):
     for mapped in mapping:
         if mapped[0] == point_2d:

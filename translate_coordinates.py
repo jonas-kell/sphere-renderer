@@ -4,9 +4,6 @@ from raycast import ray_intersect_triangle, get_barycentric_coordinates
 
 from coordinates import (
     get_2d_coordinates_of_pentagons,
-    get_2d_coordinates,
-    get_3d_coordinates,
-    get_2d_to_3d,
     get_3d_to_2d,
 )
 
