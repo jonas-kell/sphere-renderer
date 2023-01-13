@@ -8,6 +8,12 @@ from translate_coordinates import get_2d_coordinate_from_circle_coordinate
 
 from PIL import ImageGrab
 
+# ! Variables for configuration
+# 80, 3 gives good resolution, but takes ca. 30 sek on good hardware
+radius = 30
+pixel_width = 5
+# ! Variables for configuration end
+
 root = tkinter.Tk()
 output_canvas = tkinter.Canvas(root)
 input_canvas = tkinter.Canvas(root)
@@ -67,9 +73,6 @@ def draw_globe_projection():
     output_canvas.delete("all")
     output_canvas.create_rectangle(0, 0, in_width, in_height, fill="white")
 
-    # 80, 3 gives good resolution, but takes ca. 30 sek
-    radius = 30
-    pixel_width = 5
     radius_squared = radius * radius
 
     for i in range(-radius, radius + 1):
