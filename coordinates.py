@@ -163,23 +163,6 @@ def get_2d_coordinates_of_pentagons():
     return pentagons
 
 
-pentagon_cache_3d = None
-
-
-def get_3d_coordinates_of_pentagons():
-    global pentagon_cache_3d
-    if pentagon_cache_3d is None:
-        pentagon_cache_3d = []
-
-        for pent in pentagons:
-            arr = []
-            for point in pent:
-                arr.append(get_3d_to_2d(point_2d=point))
-            pentagon_cache_3d.append(arr)
-
-    return pentagon_cache_3d
-
-
 cache_3d = [
     AAA,
     BBB,

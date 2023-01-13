@@ -63,7 +63,7 @@ def get_in_image():
 def draw_globe_projection():
     in_image = get_in_image()
 
-    # print("started drawing sphere")
+    print("started drawing sphere")
     output_canvas.delete("all")
     output_canvas.create_rectangle(0, 0, in_width, in_height, fill="white")
 
@@ -96,7 +96,7 @@ def draw_globe_projection():
                     width=0,
                 )
 
-    # print("finished drawing sphere")
+    print("finished drawing sphere")
 
 
 draw_globe_projection()
@@ -115,10 +115,14 @@ def mouse_move(e):
         width=0,
     )
 
+
+def button_event(e):
+    print("update trigger")
     draw_globe_projection()
 
 
 # Bind the mouse_move function
 input_canvas.bind("<B1-Motion>", mouse_move)
+root.bind("<Return>", button_event)
 
 root.mainloop()

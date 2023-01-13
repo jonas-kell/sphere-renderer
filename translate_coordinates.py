@@ -32,12 +32,18 @@ def circle_coordinate_to_sphere_coordinate(circle_x, circle_y):
 def find_intersected_triangle_in_2d_and_transform_coordinates(
     sphere_x, sphere_y, sphere_z
 ):
-    get_triangle_cache()
+    triangles = get_triangle_cache()
 
-    if sphere_x > sphere_y:
-        return 0, 0
-    else:
-        return 1, 0
+    for triangle in triangles:
+        if ray_intersect_triangle(
+            np.array([0, 0, 0]),
+            2 * np.array([sphere_x, sphere_y, sphere_z]),
+            triangle[0],
+        ):
+            # we have found the correct triangle, transform the coordinates !!
+            return 1, 1
+
+    return 3.5, 3.5
 
 
 triangle_cache = None
@@ -62,8 +68,8 @@ def get_triangle_cache():
             for i in range(0, 5):
                 triangle_cache.append(
                     (
-                        np.array([center_2d, points_2d[i], points_2d[(i + 1) % 5]]),
                         np.array([center_3d, points_3d[i], points_3d[(i + 1) % 5]]),
+                        np.array([center_2d, points_2d[i], points_2d[(i + 1) % 5]]),
                     )
                 )
 
