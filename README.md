@@ -2,7 +2,7 @@
 
 A trial project, used to teach math focused advanced programming paradigms.
 
-Used to ducate students mainly during the [Mathezirkel](https://www.uni-augsburg.de/de/fakultaet/mntf/math/einricht/mathezirkel/) of Augsburg University.
+Used to educate students mainly during the [Mathezirkel](https://www.uni-augsburg.de/de/fakultaet/mntf/math/einricht/mathezirkel/) of Augsburg University.
 
 # How it works:
 
@@ -13,6 +13,8 @@ Pressing `Enter` on the keyboard renders the image drawn onto the net on the sur
 This should look something like this:
 
 ![](./demo_screenshot.png)
+
+The mathematical concept behind this is called [Geodesic polyhedron](https://en.wikipedia.org/wiki/Geodesic_polyhedron).
 
 # Quickstart
 
