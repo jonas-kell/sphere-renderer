@@ -113,6 +113,23 @@ mapping = [
     (TT, OOO),
 ]
 
+
+def get_2d_to_3d(point_3d):
+    for mapped in mapping:
+        if mapped[1] == point_3d:
+            return mapped[0]
+
+    raise IndexError
+
+
+def get_3d_to_2d(point_2d):
+    for mapped in mapping:
+        if mapped[0] == point_2d:
+            return mapped[1]
+
+    raise IndexError
+
+
 pentagons = [  # only the 2d points
     (A, B, C, D, E),
     (D, I, J, K, F),
@@ -129,69 +146,96 @@ pentagons = [  # only the 2d points
 ]
 
 
+def get_2d_coordinates_of_hexagons():
+    return pentagons
+
+
+pentagon_cache_3d = None
+
+
+def get_3d_coordinates_of_hexagons():
+    global pentagon_cache_3d
+    if pentagon_cache_3d is None:
+        pentagon_cache_3d = []
+
+        for pent in pentagons:
+            arr = []
+            for point in pent:
+                arr.append(get_3d_to_2d(point_2d=point))
+            pentagon_cache_3d.append(arr)
+
+    return pentagon_cache_3d
+
+
+cache_3d = [
+    AAA,
+    BBB,
+    CCC,
+    DDD,
+    EEE,
+    FFF,
+    GGG,
+    HHH,
+    III,
+    JJJ,
+    KKK,
+    LLL,
+    MMM,
+    NNN,
+    OOO,
+    PPP,
+    QQQ,
+    RRR,
+    SSS,
+    TTT,
+]
+
+
 def get_3d_coordinates():
-    return [
-        AAA,
-        BBB,
-        CCC,
-        DDD,
-        EEE,
-        FFF,
-        GGG,
-        HHH,
-        III,
-        JJJ,
-        KKK,
-        LLL,
-        MMM,
-        NNN,
-        OOO,
-        PPP,
-        QQQ,
-        RRR,
-        SSS,
-        TTT,
-    ]
+    return cache_3d
+
+
+cache_2d = [
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    G,
+    H,
+    I,
+    J,
+    K,
+    L,
+    M,
+    N,
+    O,
+    P,
+    Q,
+    R,
+    S,
+    T,
+    AA,
+    BB,
+    CC,
+    DD,
+    EE,
+    FF,
+    GG,
+    HH,
+    II,
+    JJ,
+    KK,
+    LL,
+    MM,
+    NN,
+    OO,
+    PP,
+    QQ,
+    TT,
+]
 
 
 def get_2d_coordinates():
-    return [
-        A,
-        B,
-        C,
-        D,
-        E,
-        F,
-        G,
-        H,
-        I,
-        J,
-        K,
-        L,
-        M,
-        N,
-        O,
-        P,
-        Q,
-        R,
-        S,
-        T,
-        AA,
-        BB,
-        CC,
-        DD,
-        EE,
-        FF,
-        GG,
-        HH,
-        II,
-        JJ,
-        KK,
-        LL,
-        MM,
-        NN,
-        OO,
-        PP,
-        QQ,
-        TT,
-    ]
+    return cache_2d

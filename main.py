@@ -1,4 +1,12 @@
 import tkinter
+from coordinates import (
+    get_2d_coordinates_of_hexagons,
+    get_3d_coordinates_of_hexagons,
+    get_2d_coordinates,
+    get_3d_coordinates,
+    get_2d_to_3d,
+    get_3d_to_2d,
+)
 
 root = tkinter.Tk()
 output_canvas = tkinter.Canvas(root)
@@ -36,6 +44,5 @@ def mouse_move(e):
 
 # Bind the mouse_move function
 input_canvas.bind("<B1-Motion>", mouse_move)
-
 
 root.mainloop()
