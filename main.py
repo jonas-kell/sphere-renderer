@@ -1,4 +1,5 @@
 import tkinter
+import numpy as np
 from coordinates import (
     get_2d_coordinates_of_pentagons,
     get_3d_coordinates_of_pentagons,
@@ -50,6 +51,34 @@ for pentagon in pentagons:
 
         input_canvas.create_line(point_a_x, point_a_y, point_b_x, point_b_y, width=2)
 
+# draw on the
+def draw_globe_projection():
+    print("started drawing sphere")
+    output_canvas.create_rectangle(0, 0, in_width, in_height, fill="white")
+
+    radius = 30
+    pixel_width = 5
+    radius_squared = radius * radius
+
+    for i in range(-radius, radius + 1):
+        i_sqared = i * i
+        for j in range(-radius, radius + 1):
+            j_squared = j * j
+            if i_sqared + j_squared <= radius_squared:
+                output_canvas.create_rectangle(
+                    out_width // 2 + pixel_width * i,
+                    out_height // 2 - pixel_width * j,
+                    out_width // 2 + pixel_width * i + 2 * pixel_width - 2,
+                    out_height // 2 - pixel_width * j + 2 * pixel_width - 2,
+                    fill="black",
+                    width=0,
+                )
+
+    print("finished drawing sphere")
+
+
+draw_globe_projection()
+
 
 def mouse_move(e):
     size = 20
@@ -63,6 +92,8 @@ def mouse_move(e):
         fill="green",
         width=0,
     )
+
+    draw_globe_projection()
 
 
 # Bind the mouse_move function
