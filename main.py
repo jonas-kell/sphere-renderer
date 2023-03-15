@@ -88,7 +88,7 @@ def draw_globe_projection():
 
                 # look up color
                 x_canvas, y_canvas = coords_to_2d_canvas_coords(x_2d, y_2d)
-                color = "#%02x%02x%02x" % in_image.getpixel((x_canvas, y_canvas))
+                color = "#%02x%02x%02x" % in_image.getpixel((x_canvas, y_canvas))[0:3]
 
                 # render to canvas
                 output_canvas.create_rectangle(
