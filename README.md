@@ -2,7 +2,7 @@
 
 A trial project, used to teach math focused advanced programming paradigms.
 
-Used to educate students mainly during the [Mathezirkel](https://www.uni-augsburg.de/de/fakultaet/mntf/math/einricht/mathezirkel/) of Augsburg University.
+Used to educate students mainly during the [Mathezirkel](https://www.uni-augsburg.de/de/fakultaet/mntf/math/einricht/mathezirkel/) of the University of Augsburg.
 
 # How it works:
 
